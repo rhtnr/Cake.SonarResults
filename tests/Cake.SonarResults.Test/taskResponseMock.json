@@ -1,0 +1,22 @@
+{
+    "task": {
+        "id": "AW_Eo9r1HErFYEHBDpHN",
+        "type": "REPORT",
+        "componentId": "AW-q7YatHErFYEHBDpGU",
+        "componentKey": "CI.Test",
+        "componentName": "CI.Test",
+        "componentQualifier": "TRK",
+        "analysisId": "AW_EpPNpIMlVdJl9IY2G",
+        "status": "SUCCESS",
+        "submittedAt": "2020-01-21T01:57:50+0530",
+        "submitterLogin": "admin",
+        "startedAt": "2020-01-21T01:57:51+0530",
+        "executedAt": "2020-01-21T02:02:31+0530",
+        "executionTimeMs": 279978,
+        "logs": false,
+        "hasScannerContext": true,
+        "organization": "default-organization",
+        "warningCount": 1,
+        "warnings": []
+    }
+}

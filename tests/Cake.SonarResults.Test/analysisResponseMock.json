@@ -1,0 +1,55 @@
+{
+  "projectStatus": {
+    "status": "ERROR",
+    "conditions": [
+        {
+            "status": "ERROR",
+            "metricKey": "new_reliability_rating",
+            "comparator": "GT",
+            "periodIndex": 1,
+            "errorThreshold": "1",
+            "actualValue": "3"
+        },
+      {
+        "status": "OK",
+        "metricKey": "new_security_rating",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "1",
+        "actualValue": "1"
+      },
+      {
+        "status": "OK",
+        "metricKey": "new_maintainability_rating",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "1",
+        "actualValue": "1"
+      },
+      {
+        "status": "ERROR",
+        "metricKey": "new_coverage",
+        "comparator": "LT",
+        "periodIndex": 1,
+        "errorThreshold": "80",
+        "actualValue": "3.228931223764934"
+      },
+      {
+        "status": "ERROR",
+        "metricKey": "new_duplicated_lines_density",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "3",
+        "actualValue": "3.9595817177769943"
+      }
+    ],
+    "periods": [
+      {
+        "index": 1,
+        "mode": "previous_version",
+        "date": "2020-01-16T14:02:37+0530"
+      }
+    ],
+    "ignoredConditions": false
+  }
+}

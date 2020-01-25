@@ -1,0 +1,6 @@
+projectKey=CI.Test
+serverUrl=http://sonarqube-vmh:9000/sonarqube
+serverVersion=7.9.1.27448
+dashboardUrl=http://sonarqube-vmh:9000/sonarqube/dashboard?id=CI.Test
+ceTaskId=AW_KP4VKHErFYEHBDpHY
+ceTaskUrl=http://sonarqube-vmh:9000/sonarqube/api/ce/task?id=AW_KP4VKHErFYEHBDpHY
