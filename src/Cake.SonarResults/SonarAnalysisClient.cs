@@ -25,13 +25,18 @@ namespace Cake.SonarResults
             _Client = new RestClient();
         }
 
-        public ProjectStatus GetAnalysisResults(string sonarUrl, string analysisId)
+        public ProjectStatus GetAnalysisResults(SonarResultsSettings settings, string analysisId)
         {
             try
             {
+                String sonarUrl = settings.Url;
                 if (!Utility.ValidateUrl(sonarUrl))
                 {
                     throw new ArgumentException("Invalid SonarQube URL");
+                }
+                if (settings.IsAuthEnabled)
+                {
+                    _Client.Authenticator = settings.GetAuthenticator;
                 }
                 _Logger.Information($"Initializing analysis request");
                 string url = String.Format(_AnalysisUrl, sonarUrl, analysisId);

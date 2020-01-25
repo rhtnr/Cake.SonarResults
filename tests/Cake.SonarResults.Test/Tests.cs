@@ -59,9 +59,10 @@ namespace Cake.SonarResults.Test
             ICakeContext context = Mock.Of<ICakeContext>();
             IRestClient client = TestSetup.MockRestClient<TaskWrapper>(HttpStatusCode.Accepted, TestSetup.TaskResponse);
             SonarTaskClient taskClient = new SonarTaskClient(context, client);
+            SonarResultsSettings settings = new SonarResultsSettings("http://someurl");
 
             //act
-            Task taskResult = taskClient.GetTaskResults("http://someurl", "AW_Eo9r1HErFYEHBDpHN");
+            Task taskResult = taskClient.GetTaskResults(settings, "AW_Eo9r1HErFYEHBDpHN");
 
             //assert
             Assert.NotNull(taskResult);
@@ -75,9 +76,10 @@ namespace Cake.SonarResults.Test
             ICakeContext context = Mock.Of<ICakeContext>();
             IRestClient client = TestSetup.MockRestClient<ProjectStatusWrapper>(HttpStatusCode.Accepted, TestSetup.AnalysisResponse);
             SonarAnalysisClient analysisClient = new SonarAnalysisClient(context, client);
+            SonarResultsSettings settings = new SonarResultsSettings("http://someurl");
 
             //act
-            ProjectStatus projectResult = analysisClient.GetAnalysisResults("http://someurl", "AW_YNmu6IMlVdJl9Ii6g");
+            ProjectStatus projectResult = analysisClient.GetAnalysisResults(settings, "AW_YNmu6IMlVdJl9Ii6g");
 
             //assert
             Assert.NotNull(projectResult);
@@ -95,6 +97,25 @@ namespace Cake.SonarResults.Test
 
             //assert
             Assert.Equal("AW_KP4VKHErFYEHBDpHY", id);
+        }
+
+        [Fact]
+        public void AuthSettings()
+        {
+            //arrange
+            SonarResultsSettings settingsWithToken = new SonarResultsSettings("someurl", "abc");
+            SonarResultsSettings settingsWithUser = new SonarResultsSettings("someurl", "abc", "abc");
+            SonarResultsSettings settingsWithNoCreds = new SonarResultsSettings("someurl");
+
+            //arrange
+            bool authEnabledToken = settingsWithToken.IsAuthEnabled;
+            bool authEnabledUser = settingsWithUser.IsAuthEnabled;
+            bool authEnabledNone = settingsWithNoCreds.IsAuthEnabled;
+
+            //assert
+            Assert.True(authEnabledToken);
+            Assert.True(authEnabledUser);
+            Assert.False(authEnabledNone);
         }
     }
 }

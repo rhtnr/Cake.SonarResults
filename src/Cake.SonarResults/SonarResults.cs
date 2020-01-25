@@ -20,7 +20,7 @@ namespace Cake.SonarResults
             SonarAnalysisClient analysisClient = new SonarAnalysisClient(context);
             while (true)
             {
-                var taskResults = taskClient.GetTaskResults(settings.Url, taskId);
+                var taskResults = taskClient.GetTaskResults(settings, taskId);
                 //until the status is SUCCESS, CANCELED or FAILED
                 if (taskResults.Status != "SUCCESS" && taskResults.Status != "CANCELED" && taskResults.Status != "FAILED")
                 {
@@ -30,7 +30,7 @@ namespace Cake.SonarResults
                 {
                     if (taskResults.Status == "SUCCESS")
                     {
-                        var analysisStatus = analysisClient.GetAnalysisResults(settings.Url, taskResults.AnalysisId);
+                        var analysisStatus = analysisClient.GetAnalysisResults(settings, taskResults.AnalysisId);
                         logger.Information(analysisStatus);
                         if (analysisStatus.Status == "ERROR" || analysisStatus.Status == "FAILED")
                         {

@@ -27,10 +27,15 @@ namespace Cake.SonarResults
             _Client = new RestClient();
         }
 
-        public Task GetTaskResults(string sonarUrl, string taskId)
+        public Task GetTaskResults(SonarResultsSettings settings, string taskId)
         {
             try
             {
+                string sonarUrl = settings.Url;
+                if (settings.IsAuthEnabled)
+                {
+                    _Client.Authenticator = settings.GetAuthenticator;
+                }
                 if (!Utility.ValidateUrl(sonarUrl))
                 {
                     throw new ArgumentException("Invalid SonarQube URL");
