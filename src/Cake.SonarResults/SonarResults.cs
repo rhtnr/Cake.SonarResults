@@ -43,6 +43,7 @@ namespace Cake.SonarResults
                     else
                     {
                         logger.Error($"SonarQube Task Failed! - STATUS => {taskResults.Status}");
+                        throw new CakeException($"SonarQube task returned {taskResults.Status}");
                     }
                     break;
                 }
