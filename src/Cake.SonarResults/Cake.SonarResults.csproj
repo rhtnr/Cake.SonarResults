@@ -1,23 +1,28 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	<Version>0.2.0</Version>
-	<Authors>Rohit</Authors>
-	<Company>https://github.com/rhtnr</Company>
-	<PackageProjectUrl>https://github.com/rhtnr/Cake.SonarResults</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/rhtnr/Cake.SonarResults</RepositoryUrl>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<Authors>Rohit</Authors>
+		<Company>https://github.com/rhtnr</Company>
+		<PackageProjectUrl>https://github.com/rhtnr/Cake.SonarResults</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rhtnr/Cake.SonarResults</RepositoryUrl>
+		<Version>1.0.0</Version>
+		<VersionSuffix Condition=" '$(Configuration)' == 'Debug' ">dev</VersionSuffix>
+		<Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
+		<Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
+		<Version Condition=" '$(Configuration)' == 'Debug' ">0.3.$(Build)-dev.$(Revision)</Version>
+		<Version Condition=" '$(Configuration)' == 'Release' ">0.3.$(Build).$(Revision)</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.36.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="RestSharp" Version="106.10.1" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Cake.Core" Version="0.36.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="RestSharp" Version="106.10.1" />
+	</ItemGroup>
 </Project>
