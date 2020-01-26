@@ -15,7 +15,18 @@
 		<Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
 		<Version Condition=" '$(Configuration)' == 'Debug' ">0.3.$(Build)-dev.$(Revision)</Version>
 		<Version Condition=" '$(Configuration)' == 'Release' ">0.3.$(Build).$(Revision)</Version>
+		<PackageIcon>cake-contrib-medium.png</PackageIcon>
+		<PackageIconUrl />
+		<Description>A Cake addin to break the build if SonarQube Analysis fails</Description>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="res\cake-contrib-medium.png" />
+	  <None Include="src\Cake.SonarResults\res\cake-contrib-medium.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Cake.Core" Version="0.36.0" />
@@ -24,5 +35,11 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="RestSharp" Version="106.10.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="res\cake-contrib-medium.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 </Project>
