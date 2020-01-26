@@ -17,8 +17,8 @@ jobs:
       run: dotnet test tests/Cake.SonarResults.Test/Cake.SonarResults.Test.csproj
     - name: Build
       run: |
-        find . -name "*.nupkg" -type f -delete
         dotnet build -c Release
+        find . -name "*.nupkg" -type f -delete
     - name: Publish
       run: dotnet publish -c Release
     - name: Push
