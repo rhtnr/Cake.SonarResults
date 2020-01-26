@@ -8,25 +8,37 @@ using System.Text;
 
 namespace Cake.SonarResults
 {
-    public class SonarAnalysisClient
+    public class SonarAnalysisClient : SonarClient
     {
         private readonly string _AnalysisUrl = "{0}/api/qualitygates/project_status?analysisId={1}";
         private readonly ICakeLog _Logger;
         private readonly IRestClient _Client;
+        private readonly string clientName = "SonarQube Analysis";
+
+        protected override string ClientName
+        {
+            get
+            {
+                return clientName;
+            }
+        }
         public SonarAnalysisClient(ICakeContext context, IRestClient client)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
             _Logger = context.Log;
             _Client = client;
         }
 
         public SonarAnalysisClient(ICakeContext context)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
             _Logger = context.Log;
             _Client = new RestClient();
         }
 
         public ProjectStatus GetAnalysisResults(SonarResultsSettings settings, string analysisId)
         {
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
             try
             {
                 String sonarUrl = settings.Url;
@@ -44,18 +56,7 @@ namespace Cake.SonarResults
                 _Logger.Information($"Setting API endpoint to {url} [POST]");
                 request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
                 var queryResult = _Client.Execute<ProjectStatusWrapper>(request);
-                if(queryResult.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    throw new CakeException("Sonar Analysis has not been found probably because it has already been deleted");
-                }
-                if (queryResult.StatusCode != System.Net.HttpStatusCode.Accepted)
-                {
-                    throw new CakeException($"Sonar Analysis cannot be retrieved  - {queryResult.StatusDescription}");
-                }
-                if (queryResult.Data == null)
-                {
-                    throw new FormatException($"Could not parse response from API [{queryResult?.StatusCode}] [{queryResult?.StatusDescription}] [{queryResult?.Content}]");
-                }
+                ValidateResult(queryResult);
                 ProjectStatusWrapper x = queryResult.Data;
                 return x.ProjectStatus;
             }

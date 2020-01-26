@@ -2,8 +2,6 @@ using Cake.Core;
 using Cake.SonarResults.Models;
 using Moq;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Xunit;

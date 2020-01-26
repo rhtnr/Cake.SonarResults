@@ -8,11 +8,21 @@ using System.Diagnostics;
 
 namespace Cake.SonarResults
 {
-    public class SonarTaskClient
+    public class SonarTaskClient : SonarClient
     {
         private readonly string _TaskUrl = "{0}/api/ce/task?id={1}";
         private readonly ICakeLog _Logger;
         private readonly IRestClient _Client;
+        private readonly string clientName = "SonarQube Task";
+
+        protected override string ClientName
+        {
+            get
+            {
+                return clientName;
+            }
+        }
+
         public SonarTaskClient(ICakeContext context, IRestClient client)
         {
             _Logger.Information($"Initaliazing SonarTaskClient with context and REST client");
@@ -48,22 +58,11 @@ namespace Cake.SonarResults
                 _Logger.Information($"Retrieving task status from {url} [POST]");
                 //Debugger.Launch();
                 var queryResult = _Client.Execute<TaskWrapper>(request);
-                if (queryResult.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    throw new CakeException("Sonar Task has not been found probably");
-                }
-                if (queryResult.StatusCode != System.Net.HttpStatusCode.Accepted)
-                {
-                    throw new CakeException($"Sonar Task cannot be retrieved  - {queryResult.StatusDescription}");
-                }
-                if (queryResult.Data == null)
-                {
-                    throw new FormatException($"Could not parse response from API [{queryResult?.StatusCode}] [{queryResult?.StatusDescription}] [{queryResult?.Content}]");
-                }
+                ValidateResult(queryResult);
                 TaskWrapper x = queryResult.Data;
                 return x.Task;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _Logger.Error($"An error occured while retrieving Task Status from SonarQube - {ex.Message}");
                 throw;

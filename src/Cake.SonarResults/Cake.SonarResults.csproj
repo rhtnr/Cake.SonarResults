@@ -2,12 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<Version>0.2.0</Version>
+	<Authors>Rohit</Authors>
+	<Company>https://github.com/rhtnr</Company>
+	<PackageProjectUrl>https://github.com/rhtnr/Cake.SonarResults</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/rhtnr/Cake.SonarResults</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.36.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="RestSharp" Version="106.10.1" />
   </ItemGroup>
 
