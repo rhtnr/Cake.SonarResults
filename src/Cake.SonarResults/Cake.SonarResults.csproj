@@ -15,6 +15,9 @@
 		<Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
 		<Version Condition=" '$(Configuration)' == 'Debug' ">0.3.$(Build)-dev.$(Revision)</Version>
 		<Version Condition=" '$(Configuration)' == 'Release' ">0.3.$(Build).$(Revision)</Version>
+		<PackageTags>cake;cake-contrib;sonarqube sonar</PackageTags>
+		<PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 	<ItemGroup>
