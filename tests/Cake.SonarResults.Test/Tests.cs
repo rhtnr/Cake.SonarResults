@@ -55,7 +55,7 @@ namespace Cake.SonarResults.Test
         {
             //arrange
             ICakeContext context = Mock.Of<ICakeContext>();
-            IRestClient client = TestSetup.MockRestClient<TaskWrapper>(HttpStatusCode.Accepted, TestSetup.TaskResponse);
+            IRestClient client = TestSetup.MockRestClient<TaskWrapper>(HttpStatusCode.OK, TestSetup.TaskResponse);
             SonarTaskClient taskClient = new SonarTaskClient(context, client);
             SonarResultsSettings settings = new SonarResultsSettings("http://someurl");
 
@@ -72,7 +72,7 @@ namespace Cake.SonarResults.Test
         {
             //arrange
             ICakeContext context = Mock.Of<ICakeContext>();
-            IRestClient client = TestSetup.MockRestClient<ProjectStatusWrapper>(HttpStatusCode.Accepted, TestSetup.AnalysisResponse);
+            IRestClient client = TestSetup.MockRestClient<ProjectStatusWrapper>(HttpStatusCode.OK, TestSetup.AnalysisResponse);
             SonarAnalysisClient analysisClient = new SonarAnalysisClient(context, client);
             SonarResultsSettings settings = new SonarResultsSettings("http://someurl");
 
