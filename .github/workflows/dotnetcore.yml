@@ -1,4 +1,4 @@
-name: Test Publish Push
+name: Test Build Publish Push
 
 on: [push]
 
@@ -15,6 +15,8 @@ jobs:
         dotnet-version: 2.2.108
     - name: Test
       run: dotnet test tests/Cake.SonarResults.Test/Cake.SonarResults.Test.csproj
+    - name: Build
+      run: dotnet build -c Release
     - name: Publish
       run: dotnet publish -c Release
     - name: Push
