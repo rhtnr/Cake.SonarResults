@@ -6,9 +6,11 @@ using System.Threading;
 
 namespace Cake.SonarResults
 {
+    [CakeAliasCategory("SonarQube")]
     public static class SonarResults
     {
         [CakeMethodAlias]
+        [CakeAliasCategory("Build Breaking")]
         public static void SonarQubeResults(this ICakeContext context, SonarResultsSettings settings)
         {
             string taskId = SonarTaskIdRetriever.GetTaskId(context);
