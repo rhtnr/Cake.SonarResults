@@ -13,6 +13,7 @@ namespace Cake.SonarResults
 
         public void ValidateResult(IRestResponse queryResult)
         {
+            if (queryResult == null) throw new ArgumentNullException(nameof(queryResult), "Query result is invalid");
             if (queryResult.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("SonarQube returned an unauthorized exception");
@@ -21,7 +22,7 @@ namespace Cake.SonarResults
             {
                 throw new CakeException($"{ClientName} has not been found probably because it has already been deleted");
             }
-            if (queryResult.StatusCode != System.Net.HttpStatusCode.Accepted)
+            if (queryResult.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new CakeException($"{ClientName} cannot be retrieved  - {queryResult.StatusDescription}");
             }
