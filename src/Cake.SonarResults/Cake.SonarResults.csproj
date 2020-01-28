@@ -5,6 +5,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<Description>Cake addin to break a build if SonarQube analysis does not PASS</Description>
 		<Authors>Rohit</Authors>
 		<Company>https://github.com/rhtnr</Company>
 		<PackageProjectUrl>https://github.com/rhtnr/Cake.SonarResults</PackageProjectUrl>
