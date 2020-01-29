@@ -5,11 +5,29 @@ using System.Text;
 
 namespace Cake.SonarResults
 {
+    /// <summary>
+    /// Contains the settings to retrieve SonarQube analysis
+    /// </summary>
     public class SonarResultsSettings
     {
+        /// <summary>
+        /// SonarQube server username
+        /// </summary>
         public string UserName { get; private set; }
+
+        /// <summary>
+        /// SonarQube server password
+        /// </summary>
         public  string Password { get; private set; }
+
+        /// <summary>
+        /// SonarQube server token
+        /// </summary>
         public string Token { get; private set; }
+
+        /// <summary>
+        /// SonarQube server URL
+        /// </summary>
         public string Url { get; private set; }
 
         public bool IsAuthEnabled 

@@ -6,9 +6,17 @@ using System.Threading;
 
 namespace Cake.SonarResults
 {
+    /// <summary>
+    /// Contains functionality to break or continue with the build if SonarQube analysis fails
+    /// </summary>
     [CakeAliasCategory("SonarQube")]
     public static class SonarResults
     {
+        /// <summary>
+        /// Main entry point for the functionality to break or continue with the build if SonarQube analysis fails
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Build Breaking")]
         public static void SonarQubeResults(this ICakeContext context, SonarResultsSettings settings)
