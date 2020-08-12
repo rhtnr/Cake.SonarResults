@@ -1,3 +1,4 @@
+using System;
 using Cake.Core;
 using Cake.SonarResults.Models;
 using Moq;
@@ -114,6 +115,19 @@ namespace Cake.SonarResults.Test
             Assert.True(authEnabledToken);
             Assert.True(authEnabledUser);
             Assert.False(authEnabledNone);
+        }
+
+        [Fact]
+        void CorrectlyGeneratesAnAuthenticator()
+        {
+            //arrange
+            SonarResultsSettings settingsWithToken = new SonarResultsSettings("someurl", "abc");
+            SonarResultsSettings settingsWithUser = new SonarResultsSettings("someurl", "abc", "abc");
+            SonarResultsSettings settingsWithNoCreds = new SonarResultsSettings("someurl");
+
+            Assert.Throws<NotSupportedException>(() => settingsWithNoCreds.GetAuthenticator);
+            Assert.NotNull(settingsWithUser.GetAuthenticator);
+            Assert.NotNull(settingsWithToken.GetAuthenticator);
         }
     }
 }
