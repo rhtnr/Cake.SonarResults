@@ -42,7 +42,7 @@ namespace Cake.SonarResults
         {
             get
             {
-                if (IsAuthEnabled) throw new NotSupportedException("Authenticator cannot be created with no username/password or token set");
+                if (!IsAuthEnabled) throw new NotSupportedException("Authenticator cannot be created with no username/password or token set");
                 if(!string.IsNullOrEmpty(UserName))
                     return new HttpBasicAuthenticator(UserName, Password);
                 return new HttpBasicAuthenticator(Token, "");
